@@ -20,9 +20,8 @@ LOOK_BACK = 240
 
 np.random.seed(5)
 
-nvda_prices = read_csv('NVDIA/label.csv', index_col=None, delimiter=',')
-#labels = nvda_prices['close'].values
-labels = nvda_prices['Action'].values
+nvda_prices = read_csv('NVDA_LSTM/NVDA.csv', index_col=None, delimiter=',')
+labels = nvda_prices['close'].values
 dataset = labels.reshape(-1, 1)
 print(f'資料集 {dataset[:10]} 長度 {len(dataset)}')
 
@@ -59,7 +58,7 @@ Model.add(Dropout(0.1))
 Model.add(Dense(1))
 Model.compile(loss='mse', optimizer='adam')
 # 調整訓練次數可以提升準度，也可以觀察到過擬合的問題
-#Model.fit(train_x, train_y, epochs=1000, batch_size=240, verbose=0)
+Model.fit(train_x, train_y, epochs=1000, batch_size=240, verbose=0)
 
 #預測
 train_predict = Model.predict(train_x)
@@ -90,3 +89,13 @@ plt.plot(test_predict_plot)
 plt.show()
 
 #匯出CSV檔
+test_prices=Scaler.inverse_transform(dataset[test_size+LOOK_BACK:])
+
+result = pd.DataFrame(
+    data={
+        "測試價格": np.around(list(test_prices.reshape(-1)), decimals=2),
+        "預測價格": np.around(list(test_predict.reshape(-1)), decimals=2)
+    }
+)
+result.to_csv("股價預測對比.csv", sep=',', index=None)
+print(result)
