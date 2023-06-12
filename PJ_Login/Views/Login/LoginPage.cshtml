@@ -1,0 +1,32 @@
+﻿@model LoginViewModel
+
+
+@{
+    ViewData["Title"] = "LoginPage";
+    Layout = null;
+}
+<link href="~/css/login.css" rel="stylesheet" />
+<h1 class="title">華電聯網網路設備異常預警系統</h1>
+<div class="container">
+    <img src="~/images/logo.png" />
+    <h2>會員登入</h2>
+    <div class="loginform">
+        <form asp-controller="Login" asp-action="LoginPage" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+            <div class="form-group">
+                <label asp-for="UserLogin.Account" class="label-control">帳號:</label>
+                <input type="text" value="" asp-for="UserLogin.Account" class="form-control" />
+                <div asp-validation-for="UserLogin.Account" class="text-danger"></div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserLogin.Password" class="label-control">密碼:</label>
+                <input type="password" value="" asp-for="UserLogin.Password" class="form-control" />
+                <div asp-validation-for="Password" class="text-danger"></div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="form-group-button">登入</button>
+            </div>         
+        </form>
+    </div>
+</div>
