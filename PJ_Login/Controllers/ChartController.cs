@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PJ_Login.Data;
 using PJ_Login.Models;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace PJ_Login.Controllers
         {
             _context = context;
         }
+        [Authorize]
         public IActionResult Chart()
         {
             List<Output> outputs = _context.Outputs.ToList();

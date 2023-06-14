@@ -9,7 +9,7 @@
     <div class="homecontainer">
         <h2>帳號管理</h2>
         <img src="~/images/accountmanage.png" />
-        <button class="accountmanage">進入</button>
+        <button id="accountmanageButton" class="accountmanage">進入</button>
     </div>
     <div class="homecontainer">
         <h2>資料視覺化</h2>
@@ -21,5 +21,8 @@
 <script> 
     document.getElementById('datavisionButton').addEventListener('click', function () {
         window.location.href = '@Url.Action("Chart", "Chart")';
+    });
+    document.getElementById('accountmanageButton').addEventListener('click', function () {
+        window.location.href = '@Url.Action("AccountManage", "Login")';
     });
 </script>

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace PJ_Login.Controllers
 {
@@ -20,6 +20,7 @@ namespace PJ_Login.Controllers
         {
             _context = context;
         }
+      
         //登入頁面
         public IActionResult LoginPage()
         {
@@ -62,6 +63,104 @@ namespace PJ_Login.Controllers
             }
 
             return View(loginVM);
+        }
+        /*--------帳號管理部分---------*/
+        [Authorize]
+        public IActionResult AccountManage()
+        {
+            var usersmodel = _context.UserLogins.ToList();
+            return View(usersmodel);
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(UserLogin userLogin)
+        {
+            if (ModelState.IsValid)
+            {
+                // 處理保存新用戶的邏輯
+                _context.UserLogins.Add(userLogin);
+                _context.SaveChanges();
+
+                return RedirectToAction("AccountManage");
+            }
+
+            return View(userLogin);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var userLogin = _context.UserLogins.FirstOrDefault(u => u.UserId == id);
+
+            if (userLogin == null)
+            {
+                return NotFound();
+            }
+
+            return View(userLogin);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, UserLogin userLogin)
+        {
+            if (id != userLogin.UserId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                // 處理更新用戶資料的邏輯
+                _context.UserLogins.Update(userLogin);
+                _context.SaveChanges();
+
+                return RedirectToAction("AccountManage");
+            }
+
+            return View(userLogin);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var userLogin = _context.UserLogins.FirstOrDefault(u => u.UserId == id);
+
+            if (userLogin == null)
+            {
+                return NotFound();
+            }
+
+            return View(userLogin);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var userLogin = _context.UserLogins.FirstOrDefault(u => u.UserId == id);
+
+            if (userLogin == null)
+            {
+                return NotFound();
+            }
+
+            return View(userLogin);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var userLogin = _context.UserLogins.FirstOrDefault(u => u.UserId == id);
+
+            if (userLogin == null)
+            {
+                return NotFound();
+            }
+
+            _context.UserLogins.Remove(userLogin);
+            _context.SaveChanges();
+
+            return RedirectToAction("AccountManage");
         }
 
     }
