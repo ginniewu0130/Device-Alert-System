@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using PJ_Login.Data;
 using PJ_Login.Models;
 using PJ_Login.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 
@@ -27,6 +30,7 @@ namespace PJ_Login.Controllers
 
             return View(loginVM);
         }
+        
         // 登入動作
         [HttpPost]
         public IActionResult LoginPage(LoginViewModel loginVM)
@@ -38,7 +42,16 @@ namespace PJ_Login.Controllers
 
                 if (existingUser != null)
                 {
-                    // 登入成功，導向主頁
+                    // 登入成功，設定身分驗證 Cookie
+                    var claims = new List<Claim>{
+                        new Claim(ClaimTypes.Name, existingUser.Account)
+                    };
+
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -50,6 +63,6 @@ namespace PJ_Login.Controllers
 
             return View(loginVM);
         }
-    
+
     }
 }

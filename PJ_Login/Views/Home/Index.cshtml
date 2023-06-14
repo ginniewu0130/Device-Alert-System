@@ -9,11 +9,17 @@
     <div class="homecontainer">
         <h2>帳號管理</h2>
         <img src="~/images/accountmanage.png" />
-        <button>進入</button>
+        <button class="accountmanage">進入</button>
     </div>
     <div class="homecontainer">
         <h2>資料視覺化</h2>
         <img src="~/images/datavision.png" />
-        <button>進入</button>
+        <button id="datavisionButton" class="datavision">進入</button>
+        
     </div>
 </div>
+<script> 
+    document.getElementById('datavisionButton').addEventListener('click', function () {
+        window.location.href = '@Url.Action("Chart", "Chart")';
+    });
+</script>

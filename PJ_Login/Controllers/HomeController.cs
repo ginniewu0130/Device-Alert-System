@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PJ_Login.Models;
 using System;
@@ -22,7 +24,12 @@ namespace PJ_Login.Controllers
         {
             return View();
         }
-
+        
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("LoginPage", "Login");
+        }
         public IActionResult Privacy()
         {
             return View();
