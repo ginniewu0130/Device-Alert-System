@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "UploadFile";
+}
+
+<h1>UploadFile</h1>
+<form asp-action="UploadFile" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <input type="submit" value="上傳檔案" />
+</form>
+
+@if (!string.IsNullOrEmpty(ViewBag.FileName))
+{
+    <p>Uploaded file name: @ViewBag.FileName</p>
+}

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "ChartSelection";
+}
+
+<h1>ChartSelection</h1>
+
+<form asp-action="DisplayChart" method="post">
+    <label for="chartSelection">選擇圖片:</label>
+    <select id="chartSelection" name="chartType">
+        @foreach (var option in ViewBag.ChartOptions)
+        {
+            <option value="@option.Value">@option.Text</option>
+        }
+    </select>
+    <br />
+    <button type="submit">顯示圖片</button>
+</form>

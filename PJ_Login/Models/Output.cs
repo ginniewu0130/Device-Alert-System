@@ -8,7 +8,7 @@ namespace PJ_Login.Models
     public partial class Output
     {
         public string Month { get; set; }
-        public byte? Date { get; set; }
+        public byte Date { get; set; }
         public TimeSpan? Time { get; set; }
         public string Device { get; set; }
         public DateTime? Date2 { get; set; }
@@ -17,7 +17,7 @@ namespace PJ_Login.Models
         public string DevId { get; set; }
         public long? EventTime { get; set; }
         public string TimeZone { get; set; }
-        public int? LogId { get; set; }
+        public int LogId { get; set; }
         public string Type { get; set; }
         public string Subtype { get; set; }
         public string EventType { get; set; }
@@ -37,7 +37,7 @@ namespace PJ_Login.Models
         public long? SessionId { get; set; }
         public byte? Proto { get; set; }
         public string Action { get; set; }
-        public byte? PolicyId { get; set; }
+        public byte  PolicyId { get; set; }
         public string PolicyType { get; set; }
         public string PolicyUuid { get; set; }
         public string Service { get; set; }

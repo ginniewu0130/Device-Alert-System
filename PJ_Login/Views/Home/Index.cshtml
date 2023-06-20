@@ -6,23 +6,30 @@
 <link href="~/css/home.css" rel="stylesheet" />
 
 <div class="container-wrapper">
-    <div class="homecontainer">
+    <div class="homecontainer" id="accountmanageButton" style="cursor: pointer;">
         <h2>帳號管理</h2>
         <img src="~/images/accountmanage.png" />
-        <button id="accountmanageButton" class="accountmanage">進入</button>
     </div>
-    <div class="homecontainer">
+    <div class="homecontainer" id="datavisionButton" style="cursor: pointer;">
         <h2>資料視覺化</h2>
         <img src="~/images/datavision.png" />
-        <button id="datavisionButton" class="datavision">進入</button>
-        
     </div>
+    <div>
+        <div class="homecontainer" id="uploadButton" style="cursor: pointer;">
+            <h2>上傳檔案</h2>
+            <img src="~/images/file.png" />
+        </div>
+    </div>
+
 </div>
 <script> 
     document.getElementById('datavisionButton').addEventListener('click', function () {
-        window.location.href = '@Url.Action("Chart", "Chart")';
+        window.location.href = '@Url.Action("ChartSelection", "Chart")';
     });
     document.getElementById('accountmanageButton').addEventListener('click', function () {
         window.location.href = '@Url.Action("AccountManage", "Login")';
+    });
+    document.getElementById('uploadButton').addEventListener('click', function () {
+        window.location.href = '@Url.Action("UploadFile", "Upload")';
     });
 </script>

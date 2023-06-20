@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "Chart2";
+}
+@*<script src="~/lib/d3/d3.min.js"></script>*@
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<h1>Chart2</h1>
+
+<div>
+    <input class="datachange" type="range" style="width:100% ; cursor:pointer"
+           name="dataChange" min="0" max="2" value="0">
+    <p>資料:<span class="showData"></span></p>
+
+    <div id="chart">
+    </div>
+</div>
+
+<script>
+    let exdata1 = [10, 20, 30, 40, 50, 60, 70, 80];
+    let exdata2 = [30, 20, 10, 40, 60, 50, 40, 30];
+    let exdata3 = [50, 40, 30, 20, 10, 10, 20, 30];
+    const dataChange = document.querySelector('.datachange');
+    const showData = document.querySelector('.showData');
+    let chartData = [];
+    dataChange.addEventListener('change', function () {
+        chartData = [];
+        showData.textContent = dataChange.value;
+        const selectedValue = dataChange.value;
+
+        if (selectedValue === '0') {
+            chartData = exdata1.slice();
+        } 
+        else if (selectedValue === '1') {
+            chartData = exdata2.slice();
+        } 
+        else if (selectedValue === '2') {
+            chartData = exdata3.slice();
+        }
+
+        
+      
+
+        drawDiagram();
+        showData.innerHTML = chartData;
+    });
+    const drawDiagram = () => {
+        let rects = rangeSelect.selectAll('rect')
+            .data(chartData)
+            .join(
+                enter => enter.append('rect')
+                    .attr('height', 20)
+                    .attr('width', d => d)
+                    .attr('x', (d, i) => 0)
+                    .attr('y', (d, i) => i *60)
+                    .attr('fill', 'blue'),
+                update => update.attr('width', d => d),
+                exit => exit.remove()
+            )
+}
+
+    const rangeSelect = d3.select('#chart')
+        .append('svg')
+        .attr('width', 500)
+        .attr('height', 500)
+</script>
+
