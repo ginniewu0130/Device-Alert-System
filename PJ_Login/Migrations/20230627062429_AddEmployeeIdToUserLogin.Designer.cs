@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PJ_Login.Data;
 
 namespace PJ_Login.Migrations
 {
     [DbContext(typeof(LoginContext))]
-    partial class LoginContextModelSnapshot : ModelSnapshot
+    [Migration("20230627062429_AddEmployeeIdToUserLogin")]
+    partial class AddEmployeeIdToUserLogin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +31,7 @@ namespace PJ_Login.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeeId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
@@ -37,22 +40,6 @@ namespace PJ_Login.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("UserLogins");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Account = "test001",
-                            EmployeeId = "E001",
-                            Password = "12345"
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            Account = "test002",
-                            EmployeeId = "E002",
-                            Password = "12345"
-                        });
                 });
 #pragma warning restore 612, 618
         }

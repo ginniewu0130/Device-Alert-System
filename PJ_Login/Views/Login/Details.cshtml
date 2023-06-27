@@ -4,12 +4,18 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>詳細帳號內容</h1>
 
 <div>
-    <h4>UserLogin</h4>
+    <h4>帳號管理</h4>
     <hr />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmployeeId)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Account)
         </dt>
@@ -25,6 +31,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.UserId">Edit</a> |
-    <a asp-action="AccountManage">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.UserId">前往編輯</a> |
+    <a asp-action="AccountManage">返回</a>
 </div>

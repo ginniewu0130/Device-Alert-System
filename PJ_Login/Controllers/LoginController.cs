@@ -65,12 +65,14 @@ namespace PJ_Login.Controllers
             return View(loginVM);
         }
         /*--------帳號管理部分---------*/
+        //[Authorize(Roles = "Admin")]
         [Authorize]
         public IActionResult AccountManage()
         {
             var usersmodel = _context.UserLogins.ToList();
             return View(usersmodel);
         }
+        
         public IActionResult Create()
         {
             return View();
@@ -90,7 +92,7 @@ namespace PJ_Login.Controllers
 
             return View(userLogin);
         }
-
+        
         public IActionResult Edit(int id)
         {
             var userLogin = _context.UserLogins.FirstOrDefault(u => u.UserId == id);
@@ -122,7 +124,7 @@ namespace PJ_Login.Controllers
 
             return View(userLogin);
         }
-
+        
         public IActionResult Details(int id)
         {
             var userLogin = _context.UserLogins.FirstOrDefault(u => u.UserId == id);
@@ -134,7 +136,7 @@ namespace PJ_Login.Controllers
 
             return View(userLogin);
         }
-
+        
         public IActionResult Delete(int id)
         {
             var userLogin = _context.UserLogins.FirstOrDefault(u => u.UserId == id);
@@ -146,7 +148,7 @@ namespace PJ_Login.Controllers
 
             return View(userLogin);
         }
-
+        
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {

@@ -6,5 +6,6 @@ namespace PJ_Login.ViewModels
     {
         public UserLogin UserLogin { get; set; }
         public bool RememberMe { get; set; }
+        public string EmployeeId { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace PJ_Login.Models
         public bool? Level { get; set; }
         public string VirtualDomain { get; set; }
         public string Severity { get; set; }
-        public string SrcIp { get; set; }
+        public string? SrcIp { get; set; }
         public int? SrcPort { get; set; }
         public string SrcInterface { get; set; }
         public string SrcInterfaceRole { get; set; }

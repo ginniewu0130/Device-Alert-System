@@ -18,9 +18,11 @@ namespace PJ_Login.Data
             // 定義實體類別和資料表之間的映射
             modelBuilder.Entity<UserLogin>().ToTable("UserLogins");
             // 可以根據需要添加其他的映射設定
+            modelBuilder.Entity<UserLogin>().HasKey(u => u.UserId); // 設定主鍵
+            modelBuilder.Entity<UserLogin>().Property(u => u.EmployeeId);
             modelBuilder.Entity<UserLogin>().HasData(
-                new UserLogin { UserId=1,Account="test001",Password="12345"},
-                new UserLogin { UserId=2,Account="test002",Password="12345"} );
+                new UserLogin { UserId = 1, Account = "test001", Password = "12345", EmployeeId = "E001" },
+                new UserLogin { UserId = 2, Account = "test002", Password = "12345", EmployeeId = "E002" });
 
             base.OnModelCreating(modelBuilder);
         }

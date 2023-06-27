@@ -41,6 +41,10 @@ namespace PJ_Login
                     //拒絕存取路徑
                     options.AccessDeniedPath = new PathString("/Login/AccessDenied");
                 });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+            //});
             services.AddDbContext<LoginContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("LoginContext"));

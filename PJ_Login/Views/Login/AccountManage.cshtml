@@ -9,39 +9,33 @@
 <p>
     <a asp-action="Create" class="btn btn-success">新增</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Account)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Account)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UserId" class="btn btn-warning">編輯</a> |
-                <a asp-action="Details" asp-route-id="@item.UserId" class="btn btn-secondary">詳細</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserId" class="btn btn-danger">刪除</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.UserId)</th>
+                <th>@Html.DisplayNameFor(model => model.EmployeeId)</th>
+                <th>@Html.DisplayNameFor(model => model.Account)</th>
+                <th>@Html.DisplayNameFor(model => model.Password)</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                    <th>@Html.DisplayFor(modelItem => item.EmployeeId)</th>
+                    <td>@Html.DisplayFor(modelItem => item.Account)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Password)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.UserId" class="btn btn-warning">編輯</a>
+                        <a asp-action="Details" asp-route-id="@item.UserId" class="btn btn-secondary">詳細</a>
+                        <a asp-action="Delete" asp-route-id="@item.UserId" class="btn btn-danger">刪除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

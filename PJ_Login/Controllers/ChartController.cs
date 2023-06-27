@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PJ_Login.Data;
 using PJ_Login.Models;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace PJ_Login.Controllers
             var chartOptions = new List<SelectListItem>
             {
                 new SelectListItem { Value = "chart", Text = "Chart 1" },
-                new SelectListItem { Value = "chart2", Text = "Chart 2" }
+                new SelectListItem { Value = "chart2", Text = "Chart 2" },
+                new SelectListItem { Value = "chart3", Text = "Chart 3" }
             };
 
             ViewBag.ChartOptions = chartOptions;
@@ -39,6 +41,10 @@ namespace PJ_Login.Controllers
             else if (chartType == "chart2")
             {              
                 return View("Chart2"); 
+            }
+            else if(chartType == "chart3")
+            {
+                return View("Chart3");
             }
 
             return RedirectToAction("ChartSelection"); // 若沒有選擇有效的選項，重新導向回選擇頁面
@@ -64,6 +70,11 @@ namespace PJ_Login.Controllers
         {
             return View();
         }
-
+        //google chart
+        public IActionResult Chart3()
+        {
+            
+            return View();
+        }
     }
 }

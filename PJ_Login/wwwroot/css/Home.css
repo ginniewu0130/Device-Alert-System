@@ -1,15 +1,14 @@
 ﻿* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    margin: auto;
-    text-align: center;
-    justify-content: center;
     font-family: Arial, sans-serif;
     background-color: #9ccdf2;
 }
+
 .container-wrapper {
     display: flex;
     justify-content: center;
@@ -25,6 +24,8 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f8f8f8;
+    max-width: 400px;
+    width: 100%;
 }
 
     .homecontainer h2 {
@@ -33,7 +34,8 @@ body {
     }
 
     .homecontainer img {
-        width: 150px;
+        width: 100%;
+        max-width: 150px;
         height: auto;
         margin-bottom: 10px;
     }
@@ -45,4 +47,17 @@ body {
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        width: 100%;
+        max-width: 200px;
     }
+
+@media (max-width: 768px) {
+    .container-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .homecontainer {
+        max-width: 300px;
+    }
+}

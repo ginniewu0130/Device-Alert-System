@@ -4,13 +4,18 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>刪除帳號</h1>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>UserLogin</h4>
+    <h4>帳號管理</h4>
     <hr />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmployeeId)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Account)
         </dt>
@@ -25,13 +30,9 @@
         </dd>
     </dl>
     
-   
-
-    <form asp-action="DeleteConfirmed" asp-route-id="@Model.UserId" method="post">
+    <form asp-action="Delete">
         <input type="hidden" asp-for="UserId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="AccountManage">Back to List</a>
+        <input type="submit" value="刪除" class="btn btn-danger" /> |
+        <a asp-action="AccountManage" class="btn btn-primary">返回</a>
     </form>
-
-
 </div>
