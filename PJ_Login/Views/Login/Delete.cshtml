@@ -30,8 +30,7 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="UserId" />
+    <form method="post" asp-action="DeleteConfirmed" asp-route-id="@Model.UserId">
         <input type="submit" value="刪除" class="btn btn-danger" /> |
         <a asp-action="AccountManage" class="btn btn-primary">返回</a>
     </form>

@@ -13,7 +13,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.UserId)</th>
                 <th>@Html.DisplayNameFor(model => model.EmployeeId)</th>
                 <th>@Html.DisplayNameFor(model => model.Account)</th>
                 <th>@Html.DisplayNameFor(model => model.Password)</th>
@@ -24,7 +23,6 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.UserId)</td>
                     <th>@Html.DisplayFor(modelItem => item.EmployeeId)</th>
                     <td>@Html.DisplayFor(modelItem => item.Account)</td>
                     <td>@Html.DisplayFor(modelItem => item.Password)</td>

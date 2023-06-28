@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "AccessDenied";
+}
+
+<h1>您無此權限</h1>
+<hr />
+<h4>請聯絡最高權限管理員</h4>
+
+
+<a href="@ViewContext.HttpContext.Request.Headers["Referer"].ToString()"
+   class="btn btn-primary">返回上一頁</a>

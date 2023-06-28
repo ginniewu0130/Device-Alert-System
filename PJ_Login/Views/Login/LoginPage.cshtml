@@ -5,14 +5,16 @@
     ViewData["Title"] = "LoginPage";
     Layout = null;
 }
+<link rel="icon" href="~/favicon_io/favicon.ico" type="image/x-icon" />
 <link href="~/css/login.css" rel="stylesheet" />
 <h1 class="title">華電聯網網路設備異常預警系統</h1>
 <div class="container">
+    @*<img src="~/images/logo_nbg.png" />*@
     <img src="~/images/logo.png" />
     <h2>會員登入</h2>
     <div class="loginform">
         <form asp-controller="Login" asp-action="LoginPage" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>                      
             <div class="form-group">
                 <label asp-for="UserLogin.Account" class="label-control">帳號:</label>
                 <input type="text" value="" asp-for="UserLogin.Account" class="form-control" />

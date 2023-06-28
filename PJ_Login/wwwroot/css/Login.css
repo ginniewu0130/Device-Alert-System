@@ -55,3 +55,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.text-danger {
+    color: red;
+}
