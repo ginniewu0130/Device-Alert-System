@@ -1,0 +1,82 @@
+﻿@using PJ_Login.ViewModels;
+@using Newtonsoft.Json;
+@model List<LogDBViewModel>
+@{
+    ViewData["Title"] = "bar_accept";
+}
+
+<div class="d-flex" id="wrapper">
+    <!-- 側邊導覽列 -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+            <a href="@Url.Action("bar_accept", "LogChart", new { chartType = "Chart1" })" class="list-group-item list-group-item-action">Chart 1</a>
+            <a href="@Url.Action("bar_client_rst", "LogChart", new { chartType = "Chart2" })" class="list-group-item list-group-item-action">Chart 2</a>
+            <a href="@Url.Action("bar_close", "LogChart", new { chartType = "Chart3" })" class="list-group-item list-group-item-action">Chart 3</a>
+            <a href="@Url.Action("bar_deny", "LogChart", new { chartType = "Chart4" })" class="list-group-item list-group-item-action">Chart 4</a>
+            <a href="@Url.Action("bar_ip_conn", "LogChart", new { chartType = "Chart5" })" class="list-group-item list-group-item-action">Chart 5</a>
+            <a href="@Url.Action("bar_server_rst", "LogChart", new { chartType = "Chart6" })" class="list-group-item list-group-item-action">Chart 6</a>
+            <a href="@Url.Action("bar_timeout", "LogChart", new { chartType = "Chart7" })" class="list-group-item list-group-item-action">Chart 7</a>
+        </div>
+    </div>
+
+    <!-- 內容區域 -->
+    <div id="page-content-wrapper">
+        <h1>bar_accept</h1>
+        <canvas id="barChart" width="750" height="500"></canvas>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var dataAcceptJson = '@Html.Raw(JsonConvert.SerializeObject(Model.Where(x => x.condition == "accept").OrderBy(x => x.y)))';
+    var dataAccept = JSON.parse(dataAcceptJson);
+    var dataCount = dataAccept.reduce(function (countMap, item) {
+        countMap[item.y] = (countMap[item.y] || 0) + 1;
+        return countMap;
+    }, {});
+    var labels = Object.keys(dataCount);
+    var data = Object.values(dataCount);
+
+
+
+
+
+    //長條圖
+    var ctx = document.getElementById('barChart').getContext('2d');
+    var barData = {
+        labels: labels, // X軸的標籤
+        datasets: [{
+            label: 'Action狀態為accept次數',
+            data: data, // Y軸的數值
+            backgroundColor: 'rgba(0, 123, 255, 0.5)' // 長條的背景顏色
+        }]
+    };
+    Chart.defaults.font.size = 20;
+    var barOptions = {
+        responsive: true,
+        scales: {
+            x: {
+                display: true,
+                title: {
+                    display: true,
+                    text: 'DIP'
+                }
+            },
+            y: {
+                display: true,
+                title: {
+                    display: true,
+
+                },
+                suggestedMin: 0 // Y軸的最小值
+            }
+        }
+    };
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: barData,
+        options: barOptions
+    });
+</script>
+

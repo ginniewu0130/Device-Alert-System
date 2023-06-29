@@ -1,18 +1,50 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "ChartSelection";
 }
 
-<h1>ChartSelection</h1>
+<h1>圖像視覺化</h1>
 
-<form asp-action="DisplayChart" method="post">
-    <label for="chartSelection">選擇圖片:</label>
-    <select id="chartSelection" name="chartType">
-        @foreach (var option in ViewBag.ChartOptions)
-        {
-            <option value="@option.Value">@option.Text</option>
-        }
-    </select>
-    <br />
-    <button type="submit">顯示圖片</button>
-</form>
+<div class="d-flex" id="wrapper">
+    <!-- 側邊導覽列 -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+            <a href="@Url.Action("bar_accept", "LogChart", new { chartType = "Chart1" })" class="list-group-item list-group-item-action">Chart 1</a>
+            <a href="@Url.Action("bar_client_rst", "LogChart", new { chartType = "Chart2" })" class="list-group-item list-group-item-action">Chart 2</a>
+            <a href="@Url.Action("bar_close", "LogChart", new { chartType = "Chart3" })" class="list-group-item list-group-item-action">Chart 3</a>
+            <a href="@Url.Action("bar_deny", "LogChart", new { chartType = "Chart4" })" class="list-group-item list-group-item-action">Chart 4</a>
+            <a href="@Url.Action("bar_ip_conn", "LogChart", new { chartType = "Chart5" })" class="list-group-item list-group-item-action">Chart 5</a>
+            <a href="@Url.Action("bar_server_rst", "LogChart", new { chartType = "Chart6" })" class="list-group-item list-group-item-action">Chart 6</a>
+            <a href="@Url.Action("bar_timeout", "LogChart", new { chartType = "Chart7" })" class="list-group-item list-group-item-action">Chart 7</a>
+        </div>
+    </div>
+
+    <!-- 內容區域 -->
+    <div id="page-content-wrapper">
+        <h2>Chart Selection Page</h2>
+        <p>Please select a chart from the sidebar.</p>
+        <div id="chartContainer"></div>
+    </div>
+
+</div>
+@*<script>
+    $(document).on("click", ".list-group-item-action", function (e) {
+        e.preventDefault();
+
+        // 取得選項值
+        var chartType = $(this).data("chart-type");
+
+        // 使用Ajax載入對應的視圖
+        $.ajax({
+            url: "/Chart/GetChart",
+            data: { chartType: chartType },
+            method: "GET",
+            success: function (data) {
+                // 將載入的視圖呈現在主區域
+                $("#chartContainer").html(data);
+            },
+            error: function () {
+                console.log("Error occurred while loading chart.");
+            }
+        });
+    });*@
+</script>

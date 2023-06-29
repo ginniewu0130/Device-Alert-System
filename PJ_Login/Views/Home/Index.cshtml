@@ -15,13 +15,17 @@
         <img src="~/images/datavision.png" />
     </div>
     <div class="homecontainer" id="uploadButton" style="cursor: pointer;">
-        <h2>上傳檔案</h2>
+        <h2>訓練模型</h2>
+        <img src="~/images/file.png" />
+    </div>
+    <div class="homecontainer" id="uploadButton" style="cursor: pointer;">
+        <h2>異常檢測</h2>
         <img src="~/images/file.png" />
     </div>
 </div>
 <script> 
     document.getElementById('datavisionButton').addEventListener('click', function () {
-        window.location.href = '@Url.Action("ChartSelection", "Chart")';
+        window.location.href = '@Url.Action("bar_accept", "LogChart")';
     });
     document.getElementById('accountmanageButton').addEventListener('click', function () {
         window.location.href = '@Url.Action("AccountManage", "Login")';

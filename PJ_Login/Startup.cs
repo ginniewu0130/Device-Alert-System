@@ -49,9 +49,9 @@ namespace PJ_Login
             {
                 options.UseSqlServer(Configuration.GetConnectionString("LoginContext"));
             });
-            services.AddDbContext<ChartDBContext>(options =>
+            services.AddDbContext<LogDBContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ChartDBContext"));
+                options.UseSqlServer(Configuration.GetConnectionString("LogDBContext"));
             });
 
         }

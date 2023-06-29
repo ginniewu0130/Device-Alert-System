@@ -4,28 +4,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PJ_Login.Data;
 using PJ_Login.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+
 
 namespace PJ_Login.Controllers
 {
     public class ChartController : Controller
     {
-        private readonly ChartDBContext _ctx;
-        public ChartController(ChartDBContext context)
-        {
-            _ctx = context;
-        }
+       
         [Authorize]
         public IActionResult ChartSelection()
         {
-            // 建立下拉式選單的選項
-            var chartOptions = new List<SelectListItem>
-            {
-                new SelectListItem { Value = "chart", Text = "Chart 1" },
-                new SelectListItem { Value = "chart2", Text = "Chart 2" },
-                new SelectListItem { Value = "chart3", Text = "Chart 3" }
-            };
+            var chartOptions = Enum.GetValues(typeof(ChartType))
+                .Cast<ChartType>()
+                .Select(c => new SelectListItem { Value = c.ToString(), Text = GetChartTypeName(c) })
+                .ToList();
 
             ViewBag.ChartOptions = chartOptions;
 
@@ -34,47 +29,92 @@ namespace PJ_Login.Controllers
         [HttpPost]
         public IActionResult DisplayChart(string chartType)
         {
-            if (chartType == "chart")
-            {                
-                return View("Chart"); 
-            }
-            else if (chartType == "chart2")
-            {              
-                return View("Chart2"); 
-            }
-            else if(chartType == "chart3")
+            if (Enum.TryParse(chartType, out ChartType selectedChart))
             {
-                return View("Chart3");
+                switch (selectedChart)
+                {
+                    case ChartType.Chart1:
+                        return RedirectToAction("Chart1");
+
+                    case ChartType.Chart2:
+                        return RedirectToAction("Chart2");
+
+                    case ChartType.Chart3:
+                        return RedirectToAction("Chart3");
+                    
+                    case ChartType.Chart4:
+                        return RedirectToAction("Chart4");
+
+                    case ChartType.Chart5:
+                        return RedirectToAction("Chart5");
+                    
+                    case ChartType.Chart6:
+                        return RedirectToAction("Chart6");
+                    
+                    case ChartType.Chart7:
+                        return RedirectToAction("Chart7");
+                }
             }
 
-            return RedirectToAction("ChartSelection"); // 若沒有選擇有效的選項，重新導向回選擇頁面
+            return RedirectToAction("ChartSelection");
         }
 
-
-        public IActionResult Chart()
+        public enum ChartType
         {
-            List<Output> outputs = _ctx.Outputs.ToList();
-            List<Output3> output3s = _ctx.Output3s.ToList();
-            var labels = _ctx.Outputs.Select(x => x.SrcIp).Distinct().ToList();
-            var datas = _ctx.Output3s.Select(x => x.Action).Distinct().ToList();
-
-            var chartVM = new ChartViewModel
+            Chart1,
+            Chart2,
+            Chart3,
+            Chart4,
+            Chart5,
+            Chart6,
+            Chart7
+        }
+        private string GetChartTypeName(ChartType chartType)
+        {
+            switch (chartType)
             {
-                Labels = labels,
-                Datas = datas
-            };
-            return View(chartVM);
-        }
+                case ChartType.Chart1:
+                    return "Chart 1";
 
-        public IActionResult Chart2()
-        {
-            return View();
+                case ChartType.Chart2:
+                    return "Chart 2";
+
+                case ChartType.Chart3:
+                    return "Chart 3";
+
+                case ChartType.Chart4:
+                    return "Chart 4";
+                
+                case ChartType.Chart5:
+                    return "Chart 5";
+                
+                case ChartType.Chart6:
+                    return "Chart 6";
+                
+                case ChartType.Chart7:
+                    return "Chart 7";
+
+                default:
+                    return string.Empty;
+            }
         }
-        //google chart
-        public IActionResult Chart3()
-        {
-            
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult GetChart(string chartType)
+        //{
+        //    switch (chartType)
+        //    {
+        //        case "Chart1":
+        //            return PartialView("Chart1");
+
+        //        case "Chart2":
+        //            return PartialView("Chart2");
+
+        //        case "Chart3":
+        //            return PartialView("Chart3");
+
+        //        default:
+        //            return Content("Invalid chart type.");
+        //    }
+        //}
     }
 }
