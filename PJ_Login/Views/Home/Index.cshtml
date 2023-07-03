@@ -16,9 +16,9 @@
     </div>
     <div class="homecontainer" id="uploadButton" style="cursor: pointer;">
         <h2>訓練模型</h2>
-        <img src="~/images/file.png" />
+        <img src="~/images/predictive-models.png" />
     </div>
-    <div class="homecontainer" id="uploadButton" style="cursor: pointer;">
+    <div class="homecontainer" id="checkButton" style="cursor: pointer;">
         <h2>異常檢測</h2>
         <img src="~/images/file.png" />
     </div>
@@ -31,6 +31,9 @@
         window.location.href = '@Url.Action("AccountManage", "Login")';
     });
     document.getElementById('uploadButton').addEventListener('click', function () {
+        window.location.href = '@Url.Action("UploadFile", "Upload")';
+    });
+    document.getElementById('checkButton').addEventListener('click', function () {
         window.location.href = '@Url.Action("UploadFile", "Upload")';
     });
 </script>

@@ -4,23 +4,24 @@
 @{
     ViewData["Title"] = "bar_deny";
 }
+
 <div class="d-flex" id="wrapper">
     <!-- 側邊導覽列 -->
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="list-group list-group-flush">
-            <a href="@Url.Action("bar_accept", "LogChart", new { chartType = "Chart1" })" class="list-group-item list-group-item-action">Chart 1</a>
-            <a href="@Url.Action("bar_client_rst", "LogChart", new { chartType = "Chart2" })" class="list-group-item list-group-item-action">Chart 2</a>
-            <a href="@Url.Action("bar_close", "LogChart", new { chartType = "Chart3" })" class="list-group-item list-group-item-action">Chart 3</a>
-            <a href="@Url.Action("bar_deny", "LogChart", new { chartType = "Chart4" })" class="list-group-item list-group-item-action">Chart 4</a>
-            <a href="@Url.Action("bar_ip_conn", "LogChart", new { chartType = "Chart5" })" class="list-group-item list-group-item-action">Chart 5</a>
-            <a href="@Url.Action("bar_server_rst", "LogChart", new { chartType = "Chart6" })" class="list-group-item list-group-item-action">Chart 6</a>
-            <a href="@Url.Action("bar_timeout", "LogChart", new { chartType = "Chart7" })" class="list-group-item list-group-item-action">Chart 7</a>
+            <a href="@Url.Action("bar_accept", "LogChart")" class="list-group-item list-group-item-action">Chart 1</a>
+            <a href="@Url.Action("bar_client_rst", "LogChart")" class="list-group-item list-group-item-action">Chart 2</a>
+            <a href="@Url.Action("bar_close", "LogChart")" class="list-group-item list-group-item-action">Chart 3</a>
+            <a href="@Url.Action("bar_deny", "LogChart")" class="list-group-item list-group-item-action">Chart 4</a>
+            <a href="@Url.Action("bar_ip_conn", "LogChart")" class="list-group-item list-group-item-action">Chart 5</a>
+            <a href="@Url.Action("bar_server_rst", "LogChart")" class="list-group-item list-group-item-action">Chart 6</a>
+            <a href="@Url.Action("bar_timeout", "LogChart")" class="list-group-item list-group-item-action">Chart 7</a>
         </div>
     </div>
 
     <!-- 內容區域 -->
     <div id="page-content-wrapper">
-        <h1>bar_deny</h1>
+        <h1>目的IP的Deny次數統計圖</h1>
         <canvas id="barChart" width="750" height="500"></canvas>
     </div>
 

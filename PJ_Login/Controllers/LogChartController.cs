@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PJ_Login.Data;
 using PJ_Login.Models;
 using PJ_Login.ViewModels;
@@ -7,6 +8,7 @@ using System.Linq;
 
 namespace PJ_Login.Controllers
 {
+    [Authorize]
     public class LogChartController : Controller
     {
         private readonly LogDBContext _context;

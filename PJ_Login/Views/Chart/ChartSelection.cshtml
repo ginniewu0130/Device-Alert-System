@@ -26,25 +26,3 @@
     </div>
 
 </div>
-@*<script>
-    $(document).on("click", ".list-group-item-action", function (e) {
-        e.preventDefault();
-
-        // 取得選項值
-        var chartType = $(this).data("chart-type");
-
-        // 使用Ajax載入對應的視圖
-        $.ajax({
-            url: "/Chart/GetChart",
-            data: { chartType: chartType },
-            method: "GET",
-            success: function (data) {
-                // 將載入的視圖呈現在主區域
-                $("#chartContainer").html(data);
-            },
-            error: function () {
-                console.log("Error occurred while loading chart.");
-            }
-        });
-    });*@
-</script>

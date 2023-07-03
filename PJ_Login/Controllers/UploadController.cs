@@ -25,7 +25,6 @@ namespace PJ_Login.Controllers
                     try
                     {
                         // 檔案儲存路徑 (桌面)
-                        //string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), file.FileName + ".txt");
                         string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), Path.ChangeExtension(file.FileName, ".txt"));
 
                         // 讀取 CSV 檔案內容

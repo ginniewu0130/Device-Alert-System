@@ -4,117 +4,79 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PJ_Login.Data;
 using PJ_Login.Models;
+using PJ_Login.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
+//測試用 改良LogChartController
 namespace PJ_Login.Controllers
 {
     public class ChartController : Controller
     {
-       
-        [Authorize]
-        public IActionResult ChartSelection()
+        private readonly LogDBContext _context;
+
+        public ChartController(LogDBContext context)
         {
-            var chartOptions = Enum.GetValues(typeof(ChartType))
-                .Cast<ChartType>()
-                .Select(c => new SelectListItem { Value = c.ToString(), Text = GetChartTypeName(c) })
-                .ToList();
-
-            ViewBag.ChartOptions = chartOptions;
-
-            return View();
+            _context = context;
         }
-        [HttpPost]
-        public IActionResult DisplayChart(string chartType)
+
+        private List<LogDBViewModel> GetChartData()
         {
-            if (Enum.TryParse(chartType, out ChartType selectedChart))
+            List<Chart> charts = _context.Charts.ToList();
+            List<LogDBViewModel> bars = new List<LogDBViewModel>();
+            foreach (Chart chart in charts)
             {
-                switch (selectedChart)
+                bars.Add(new LogDBViewModel
                 {
-                    case ChartType.Chart1:
-                        return RedirectToAction("Chart1");
-
-                    case ChartType.Chart2:
-                        return RedirectToAction("Chart2");
-
-                    case ChartType.Chart3:
-                        return RedirectToAction("Chart3");
-                    
-                    case ChartType.Chart4:
-                        return RedirectToAction("Chart4");
-
-                    case ChartType.Chart5:
-                        return RedirectToAction("Chart5");
-                    
-                    case ChartType.Chart6:
-                        return RedirectToAction("Chart6");
-                    
-                    case ChartType.Chart7:
-                        return RedirectToAction("Chart7");
-                }
+                    x = chart.SourceIp,
+                    y = chart.DestinationIp,
+                    condition = chart.Action
+                });
             }
-
-            return RedirectToAction("ChartSelection");
+            return bars;
         }
 
-        public enum ChartType
+        public IActionResult BarAccept()
         {
-            Chart1,
-            Chart2,
-            Chart3,
-            Chart4,
-            Chart5,
-            Chart6,
-            Chart7
+            List<LogDBViewModel> bars = GetChartData();
+            return View(bars);
         }
-        private string GetChartTypeName(ChartType chartType)
+
+        public IActionResult BarTimeout()
         {
-            switch (chartType)
-            {
-                case ChartType.Chart1:
-                    return "Chart 1";
-
-                case ChartType.Chart2:
-                    return "Chart 2";
-
-                case ChartType.Chart3:
-                    return "Chart 3";
-
-                case ChartType.Chart4:
-                    return "Chart 4";
-                
-                case ChartType.Chart5:
-                    return "Chart 5";
-                
-                case ChartType.Chart6:
-                    return "Chart 6";
-                
-                case ChartType.Chart7:
-                    return "Chart 7";
-
-                default:
-                    return string.Empty;
-            }
+            List<LogDBViewModel> bars = GetChartData();
+            return View(bars);
         }
-        //[HttpGet]
-        //public IActionResult GetChart(string chartType)
-        //{
-        //    switch (chartType)
-        //    {
-        //        case "Chart1":
-        //            return PartialView("Chart1");
 
-        //        case "Chart2":
-        //            return PartialView("Chart2");
+        public IActionResult BarIpConn()
+        {
+            List<LogDBViewModel> bars = GetChartData();
+            return View(bars);
+        }
 
-        //        case "Chart3":
-        //            return PartialView("Chart3");
+        public IActionResult BarDeny()
+        {
+            List<LogDBViewModel> bars = GetChartData();
+            return View(bars);
+        }
 
-        //        default:
-        //            return Content("Invalid chart type.");
-        //    }
-        //}
+        public IActionResult BarClientRst()
+        {
+            List<LogDBViewModel> bars = GetChartData();
+            return View(bars);
+        }
+
+        public IActionResult BarClose()
+        {
+            List<LogDBViewModel> bars = GetChartData();
+            return View(bars);
+        }
+
+        public IActionResult BarServerRst()
+        {
+            List<LogDBViewModel> bars = GetChartData();
+            return View(bars);
+        }
     }
 }
